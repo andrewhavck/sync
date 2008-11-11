@@ -10,4 +10,5 @@ this script is in the process of being optimized. As of right now it is slower t
 
 11/11/2008
 
-added some conditional statements, this increased the speed by a ridiculous amount. Definitely quicker than removing a large directory and copying it.
+added some conditional statements, this increased the speed by a ridiculous amount.
+Definitely quicker than removing a large directory and copying it.
