@@ -10,5 +10,4 @@ this script is in the process of being optimized. As of right now it is slower t
 
 11/11/2008
 
-added some conditional statements, this increased the speed by a ridiculous amount.
-Definitely quicker than removing a large directory and copying it.
+realized that the python function .diff_files in the filecmp module, dircmp class was causing the largest slow down...I am going to write a similar script in ruby and judge the performance difference.
