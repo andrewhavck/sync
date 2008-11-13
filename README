@@ -12,3 +12,8 @@ this script is in the process of being optimized. As of right now it is slower t
 
 realized that the python function .diff_files in the filecmp module, dircmp class was causing the largest slow 
 down...I am going to write a similar script in ruby, and judge the performance difference.
+
+11/13/2008
+
+rsync took approximately 15 minutes to sync my external, this script
+took about 17 minutes....Some improvement needed!
