@@ -36,58 +36,44 @@ def dive(remote_dir,local_dir):
      #_ walk to the child directory
      dive(r_common,l_common)
 
-   #_checks if there are more than 0 files in the remote directory before entering the
-   #_for loop 
-   if(len(filecmp.dircmp("/home/andrew","/media/whales").right_only) > 0):
-
-    #_the dir_kill contains the directories or files solely in the remote_dir.
-    #_that will be killed/erased
-    for dir_kill in filecmp.dircmp(local_dir,remote_dir).right_only:
+   #_the dir_kill contains the directories or files solely in the remote_dir.
+   #_that will be killed/erased
+   for dir_kill in filecmp.dircmp(local_dir,remote_dir).right_only:
      
-      #_get the full path
-      path_kill  = os.path.join(remote_dir,dir_kill) 
+     #_get the full path
+     path_kill  = os.path.join(remote_dir,dir_kill) 
   
-      print "Deleting " + path_kill + " --" 
+     print "Deleting " + path_kill + " --" 
   
-      #_make the child process do the removal, and wait
-      subprocess.Popen(["rm","-rf",path_kill]).wait() 
+     #_make the child process do the removal, and wait
+     subprocess.Popen(["rm","-rf",path_kill]).wait() 
   
-   #_checks if there are more than 0 files in the local directory before entering the
-   #_for loop 
-   if(len(filecmp.dircmp("/home/andrew","/media/whales").left_only) > 0):
+   #_the dir_copy contains the directories or files solely in the local_dir.
+   #_that will be copied over to the remote directory.
+   for dir_copy in filecmp.dircmp(local_dir,remote_dir).left_only:
 
-      #_the dir_copy contains the directories or files solely in the local_dir.
-       #_that will be copied over to the remote directory.
-      for dir_copy in filecmp.dircmp(local_dir,remote_dir).left_only:
+     #_get the full path for remote and local
+     l_copy  = os.path.join(local_dir,dir_copy)
+     r_copy = os.path.join(remote_dir,dir_copy) 
 
-        #_get the full path for remote and local
-        l_copy  = os.path.join(local_dir,dir_copy)
-        r_copy = os.path.join(remote_dir,dir_copy) 
-
-        print "Copying " + l_copy + " to " + r_copy + " --"  
+     print "Copying " + l_copy + " to " + r_copy + " --"  
     
-        #_make the child process to do the copying
-        subprocess.Popen(["cp","-rf",l_copy,r_copy]).wait() 
+     #_make the child process to do the copying
+     subprocess.Popen(["cp","-rf",l_copy,r_copy]).wait() 
 
-   #_checks if there are more than 0 diff files in the directory before entering the
-   #_for loop
-   if(len(filecmp.dircmp("/home/andrew","/media/whales").diff_files) > 0):
+   #_the dir_diff contains the files or directories that differ but have the 
+   #_same filename.
+   for dir_diff in filecmp.dircmp(local_dir,remote_dir).diff_files:
 
-    #_the dir_diff contains the files or directories that differ but have the 
-    #_same filename.
-      for dir_diff in filecmp.dircmp(local_dir,remote_dir).diff_files:
-
-        #_get the full path for remote and local
-        l_diff  = os.path.join(local_dir,dir_diff)
-        r_diff = os.path.join(remote_dir,dir_diff)
+     #_get the full path for remote and local
+     l_diff  = os.path.join(local_dir,dir_diff)
+     r_diff = os.path.join(remote_dir,dir_diff)
       
-        print "Updating " + r_diff + " --"  
+     print "Updating " + r_diff + " --"  
 
-        #_make the child processes to do the erasing and copying.
-        subprocess.Popen(["rm","-rf",r_diff]).wait()
-        subprocess.Popen(["cp","-rf",l_diff,r_diff]).wait()  
-
-   return 0
+     #_make the child processes to do the erasing and copying.
+     subprocess.Popen(["rm","-rf",r_diff]).wait()
+     subprocess.Popen(["cp","-rf",l_diff,r_diff]).wait()   
 
 #walah
 print "\n ---Sync starting--- \n"
