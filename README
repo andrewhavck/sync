@@ -1,19 +1,3 @@
-Requirements: python, and a unix machine.
-
 11/10/2008
 
-sync.py is a script designed to replicate two already similar directories.
-
-11/10/2008
-
-this script is in the process of being optimized. As of right now it is slower than removing a large directory and copying it.
-
-11/11/2008
-
-realized that the python function .diff_files in the filecmp module, dircmp class was causing the largest slow 
-down...I am going to write a similar script in ruby, and judge the performance difference.
-
-11/13/2008
-
-rsync took approximately 15 minutes to sync my external, this script
-took about 17 minutes....Some improvement needed!
+sync.py is a script designed to replicate directories
